@@ -29,11 +29,15 @@
 
         /* توزيع متوازن للأيقونات في الخلفية */
         .bg-icon { position: fixed; color: var(--primary-blue); opacity: 0.04; z-index: 0; pointer-events: none; }
+        
+        /* الجهة اليسرى */
         .i1 { top: 5%; left: 3%; font-size: 5rem; transform: rotate(-15deg); }
         .i2 { top: 25%; left: 8%; font-size: 3.5rem; transform: rotate(10deg); }
         .i3 { top: 50%; left: 2%; font-size: 6rem; transform: rotate(-10deg); }
         .i4 { bottom: 25%; left: 7%; font-size: 4.5rem; transform: rotate(20deg); }
         .i5 { bottom: 5%; left: 4%; font-size: 5.5rem; transform: rotate(-5deg); }
+
+        /* الجهة اليمنى */
         .i6 { top: 5%; right: 3%; font-size: 4rem; transform: rotate(15deg); }
         .i7 { top: 25%; right: 8%; font-size: 3rem; transform: rotate(-20deg); }
         .i8 { top: 50%; right: 2%; font-size: 5.5rem; transform: rotate(12deg); }
@@ -43,13 +47,20 @@
         .container { width: 100%; max-width: 850px; z-index: 2; position: relative; }
         header { text-align: center; margin-bottom: 30px; }
         
-        .logo-img { max-width: 280px; width: 100%; height: auto; filter: drop-shadow(0 0 25px var(--primary-blue)); }
-        .league-title { font-size: 3.2rem; font-weight: 900; color: #ffffff; text-shadow: 0 0 15px var(--primary-blue); margin: 10px 0; display: block; }
+        .logo-img { 
+            max-width: 280px; width: 100%; height: auto; 
+            filter: drop-shadow(0 0 25px var(--primary-blue)); 
+        }
+        
+        .league-title { 
+            font-size: 3.2rem; font-weight: 900; 
+            color: #ffffff; text-shadow: 0 0 15px var(--primary-blue);
+            margin: 10px 0; display: block;
+        }
 
-        /* تعديل توزيع الأعمدة */
         .table-header, .row { 
             display: grid; 
-            grid-template-columns: 0.5fr 3fr 1fr 1fr 1fr; 
+            grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr; 
             align-items: center; text-align: center;
         }
 
@@ -62,15 +73,7 @@
         }
 
         .rank-num { font-size: 1.8rem; font-weight: 900; color: #445b80; z-index: 2; }
-
-        /* --- تعديل تنسيق الأسماء لليمين --- */
-        .player-name { 
-            font-size: 1.5rem; font-weight: 700; color: #e0e6ed; z-index: 2;
-            text-align: right; /* المحاذاة لليمين */
-            direction: rtl;    /* اتجاه النص العربي */
-            padding-right: 15px;
-        }
-
+        .player-name { font-size: 1.5rem; font-weight: 700; color: #e0e6ed; z-index: 2; }
         .stat-val { font-size: 1.4rem; font-weight: 700; color: #b0c4de; z-index: 2; }
         .total-val { font-size: 2.2rem; font-weight: 900; color: var(--primary-blue); z-index: 2; }
 
@@ -94,13 +97,15 @@
         .rank-3 .rank-num, .rank-3 .total-val { color: var(--bronze) !important; }
 
         @media (max-width: 650px) {
+            body { padding: 10px; }
             .logo-img { max-width: 160px; }
-            .league-title { font-size: 1.6rem; }
-            .table-header, .row { grid-template-columns: 0.4fr 2.5fr 1fr; padding: 10px; }
+            .league-title { font-size: 1.6rem; margin: 5px 0 20px 0; }
+            .table-header, .row { grid-template-columns: 0.4fr 2fr 1fr; padding: 10px; }
             .stat-hide { display: none; }
-            .player-name { font-size: 1.1rem; padding-right: 5px; }
+            .player-name { font-size: 1.1rem; }
             .rank-num { font-size: 1.4rem; }
             .total-val { font-size: 1.6rem; }
+            .rank-1::after, .rank-2::after, .rank-3::after { font-size: 2.5rem; left: 2%; }
             .bg-icon { display: none; }
         }
     </style>
@@ -120,7 +125,7 @@
         </header>
 
         <div class="table-header">
-            <div>#</div><div style="text-align: right; padding-right: 15px;">اللاعب</div><div class="stat-hide">تويتش</div><div class="stat-hide">ديسكورد</div><div>المجموع</div>
+            <div>#</div><div>اللاعب</div><div class="stat-hide">تويتش</div><div class="stat-hide">ديسكورد</div><div>المجموع</div>
         </div>
 
         <div id="leaderboard"></div>
