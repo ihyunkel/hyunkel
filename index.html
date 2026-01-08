@@ -27,7 +27,6 @@
             overflow-x: hidden; position: relative;
         }
 
-        /* أيقونات الخلفية */
         .bg-icon { position: fixed; color: var(--primary-blue); opacity: 0.04; z-index: 0; pointer-events: none; }
         .i1 { top: 5%; left: 5%; font-size: 5rem; }
         .i2 { top: 12%; right: 7%; font-size: 4rem; }
@@ -37,7 +36,6 @@
         .i6 { bottom: 12%; right: 10%; font-size: 4rem; }
 
         .container { width: 100%; max-width: 850px; z-index: 2; position: relative; }
-        
         header { text-align: center; margin-bottom: 30px; }
         
         .logo-img { 
@@ -45,7 +43,6 @@
             width: 100%;
             height: auto; 
             filter: drop-shadow(0 0 25px var(--primary-blue)); 
-            transition: 0.3s;
         }
         
         .league-title { 
@@ -75,36 +72,26 @@
         .stat-val { font-size: 1.4rem; font-weight: 700; color: #b0c4de; }
         .total-val { font-size: 2.2rem; font-weight: 900; color: var(--primary-blue); }
 
-        /* المراكز الثلاثة */
-        .rank-1 { border: 2px solid var(--gold); }
-        .rank-2 { border: 2px solid var(--silver); }
-        .rank-3 { border: 2px solid var(--bronze); }
+        /* --- ألوان المراكز الثلاثة --- */
+        .rank-1 { border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
+        .rank-1 .rank-num, .rank-1 .total-val { color: var(--gold) !important; }
 
-        /* --- تعديلات الجوال (Mobile Fixes) --- */
+        .rank-2 { border: 2px solid var(--silver); box-shadow: 0 0 15px rgba(224, 224, 224, 0.15); }
+        .rank-2 .rank-num, .rank-2 .total-val { color: var(--silver) !important; }
+
+        .rank-3 { border: 2px solid var(--bronze); box-shadow: 0 0 15px rgba(205, 127, 50, 0.15); }
+        .rank-3 .rank-num, .rank-3 .total-val { color: var(--bronze) !important; }
+
         @media (max-width: 650px) {
             body { padding: 10px; }
-            
-            .logo-img { max-width: 160px; } /* تصغير الشعار في الجوال */
-            
-            .league-title { 
-                font-size: 1.6rem; /* تصغير العنوان ليناسب عرض الجوال */
-                margin: 5px 0 20px 0;
-            }
-
-            .table-header, .row { 
-                grid-template-columns: 0.4fr 2fr 1fr; /* إخفاء التفاصيل في الجوال */
-                padding: 10px;
-            }
-
-            .stat-hide { display: none; } /* إخفاء تويتش وديسكورد والتركيز على المجموع */
-            
+            .logo-img { max-width: 160px; }
+            .league-title { font-size: 1.6rem; margin: 5px 0 20px 0; }
+            .table-header, .row { grid-template-columns: 0.4fr 2fr 1fr; padding: 10px; }
+            .stat-hide { display: none; }
             .player-name { font-size: 1.1rem; }
             .rank-num { font-size: 1.4rem; }
             .total-val { font-size: 1.6rem; }
-
-            .row { margin-bottom: 8px; border-radius: 12px; }
-            
-            .bg-icon { font-size: 2rem !important; opacity: 0.02; } /* تصغير وتخفيف أيقونات الخلفية */
+            .row { margin-bottom: 8px; }
         }
     </style>
 </head>
@@ -127,8 +114,7 @@
             <div>#</div><div>اللاعب</div><div class="stat-hide">تويتش</div><div class="stat-hide">ديسكورد</div><div>المجموع</div>
         </div>
 
-        <div id="leaderboard">
-            </div>
+        <div id="leaderboard"></div>
     </div>
 
     <script>
