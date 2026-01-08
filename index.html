@@ -18,110 +18,59 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-color);
             background: radial-gradient(circle at center, #0a1931 0%, #050a15 100%);
             color: var(--text-white);
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-            position: relative;
+            margin: 0; padding: 20px; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            overflow-x: hidden; position: relative;
         }
 
-        .bg-icon {
-            position: fixed;
-            color: var(--primary-blue);
-            opacity: 0.03;
-            z-index: -1;
-            pointer-events: none;
-        }
+        .bg-icon { position: fixed; color: var(--primary-blue); opacity: 0.03; z-index: -1; pointer-events: none; }
         .icon-1 { top: 5%; left: 5%; font-size: 8rem; transform: rotate(-15deg); }
         .icon-2 { top: 70%; right: 5%; font-size: 10rem; transform: rotate(20deg); }
-        .icon-3 { top: 30%; left: 85%; font-size: 7rem; transform: rotate(-10deg); }
-        .icon-4 { bottom: 5%; left: 10%; font-size: 9rem; transform: rotate(15deg); }
-        .icon-5 { top: 15%; right: 15%; font-size: 6rem; transform: rotate(35deg); }
-        .icon-6 { bottom: 25%; left: 25%; font-size: 5rem; opacity: 0.02; }
 
         .container { width: 100%; max-width: 800px; z-index: 1; }
+        header { text-align: center; margin-bottom: 40px; }
+        .logo-img { max-width: 400px; height: auto; filter: drop-shadow(0 0 30px var(--primary-blue)); margin-bottom: -10px; }
         
-        header { 
-            text-align: center; 
-            margin-bottom: 40px; 
-        }
-        
-        .logo-img { 
-            max-width: 400px; 
-            height: auto;
-            filter: drop-shadow(0 0 30px var(--primary-blue)); 
-            margin-bottom: -10px; 
-        }
-        
+        /* تأكدنا من ظهور العنوان هنا */
         h1 { 
             font-size: 3rem; 
             font-weight: 900; 
             background: linear-gradient(to bottom, #fff, var(--primary-blue)); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
-            margin: 0; 
+            margin-top: 20px; 
+            display: block !important; 
         }
 
         .table-header, .row { 
             display: grid; 
             grid-template-columns: 0.4fr 1.8fr 0.8fr 0.8fr 0.8fr; 
-            align-items: center; 
-            text-align: center;
+            align-items: center; text-align: center;
         }
 
-        .table-header { 
-            padding: 15px 15px; 
-            color: #5d7ba7; 
-            font-weight: 700; 
-            font-size: 1rem; 
-        }
-
-        .row { 
-            background: var(--card-bg); 
-            margin-bottom: 12px; 
-            padding: 15px 15px; 
-            border-radius: 15px; 
-            border: 1px solid rgba(0, 210, 255, 0.1); 
-            transition: all 0.3s ease; 
-            backdrop-filter: blur(10px); 
-        }
+        .table-header { padding: 15px; color: #5d7ba7; font-weight: 700; font-size: 1rem; }
+        .row { background: var(--card-bg); margin-bottom: 12px; padding: 15px; border-radius: 15px; border: 1px solid rgba(0, 210, 255, 0.1); backdrop-filter: blur(10px); }
         
-        .row:hover { 
-            transform: translateY(-3px); 
-            border-color: var(--primary-blue); 
-            box-shadow: 0 5px 20px var(--accent-glow); 
-        }
-
         .rank-num { font-size: 1.6rem; font-weight: 900; color: #445b80; }
         .player-name { font-size: 1.3rem; font-weight: 700; color: #e0e6ed; }
-        .stat-val { color: #8899ac; font-size: 1.1rem; }
         .total-val { font-size: 1.7rem; font-weight: 900; color: var(--primary-blue); }
 
         .rank-1 { border: 1px solid #ffd700; background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), var(--card-bg)); }
-        .rank-1 .rank-num { color: #ffd700; text-shadow: 0 0 10px #ffd700; }
-        .rank-2 { border: 1px solid #c0c0c0; } .rank-2 .rank-num { color: #c0c0c0; }
-        .rank-3 { border: 1px solid #cd7f32; } .rank-3 .rank-num { color: #cd7f32; }
+        .rank-1 .rank-num { color: #ffd700; }
 
         @media (max-width: 650px) {
             .table-header, .row { grid-template-columns: 0.5fr 2fr 1fr; }
             .stat-hide { display: none; }
             .logo-img { max-width: 250px; }
+            h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
-    <i class="fas fa-futbol bg-icon icon-1"></i>
+
     <i class="fas fa-trophy bg-icon icon-2"></i>
-    <i class="fas fa-camera bg-icon icon-3"></i>
-    <i class="fas fa-paint-brush bg-icon icon-4"></i>
-    <i class="fas fa-gamepad bg-icon icon-5"></i>
-    <i class="fas fa-star bg-icon icon-6"></i>
 
     <div class="container">
         <header>
@@ -130,69 +79,64 @@
         </header>
 
         <div class="table-header">
-            <div>#</div>
-            <div>اللاعب</div>
-            <div class="stat-hide">تويتش</div>
-            <div class="stat-hide">ديسكورد</div>
-            <div>المجموع</div>
+            <div>#</div><div>اللاعب</div><div class="stat-hide">تويتش</div><div class="stat-hide">ديسكورد</div><div>المجموع</div>
         </div>
 
-        <div id="leaderboard-table">
-            <div style="text-align: center; padding: 20px; color: var(--primary-blue);">جاري تحميل النتائج...</div>
+        <div id="leaderboard">
+            <div style="text-align:center; padding:50px; color:var(--primary-blue);">جاري تحميل النتائج المباشرة...</div>
         </div>
     </div>
 
     <script>
-        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJiQ3Jz9lj4LDG_iP-LOEFS6Oz57ODw4JzxJWZjQT9bJ93ZHQsPrU4Ycr45JDllxFc6smJxqKATkLL/pubhtml?gid=0&single=true';
+        // استبدل الرابط أدناه برابط الـ CSV الخاص بك من جوجل شيت
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJiQ3Jz9lj4LDG_iP-LOEFS6Oz57ODw4JzxJWZjQT9bJ93ZHQsPrU4Ycr45JDllxFc6smJxqKATkLL/pub?gid=0&single=true&output=csv';
 
-        async function updateLeaderboard() {
+        async function updateData() {
             try {
-                const response = await fetch(csvUrl);
-                const data = await response.text();
-                const lines = data.split('\n').filter(line => line.trim() !== "");
+                const response = await fetch(SHEET_URL);
+                const csvText = await response.text();
                 
-                // تحويل البيانات
-                let players = lines.slice(1).map(line => {
-                    const columns = line.split(',');
-                    return {
-                        name: columns[0],
-                        twitch: parseInt(columns[1]) || 0,
-                        discord: parseInt(columns[2]) || 0,
-                        total: (parseInt(columns[1]) || 0) + (parseInt(columns[2]) || 0)
-                    };
+                // تنظيف ومنع قراءة أي أكواد HTML في حال كان الرابط خطأ
+                if (csvText.includes('<html')) {
+                    document.getElementById('leaderboard').innerHTML = "<div style='color:red; text-align:center;'>خطأ: تأكد من اختيار (CSV) عند النشر من جوجل شيت</div>";
+                    return;
+                }
+
+                const rows = csvText.split('\n').map(r => r.trim()).filter(r => r !== "");
+                
+                let players = rows.slice(1).map(row => {
+                    const cols = row.split(',');
+                    const name = cols[0] ? cols[0].replace(/"/g, '') : 'غير معروف';
+                    const twitch = parseInt(cols[1]) || 0;
+                    const discord = parseInt(cols[2]) || 0;
+                    return { name, twitch, discord, total: twitch + discord };
                 });
 
-                // ترتيب اللاعبين حسب المجموع
+                // ترتيب اللاعبين حسب المجموع تنازلياً
                 players.sort((a, b) => b.total - a.total);
 
-                const table = document.getElementById('leaderboard-table');
-                table.innerHTML = "";
-
+                const list = document.getElementById('leaderboard');
+                list.innerHTML = "";
+                
                 players.forEach((p, i) => {
-                    const rank = i + 1;
-                    let rankClass = "";
-                    if (rank === 1) rankClass = "rank-1";
-                    else if (rank === 2) rankClass = "rank-2";
-                    else if (rank === 3) rankClass = "rank-3";
-
-                    table.innerHTML += `
-                        <div class="row ${rankClass}">
-                            <div class="rank-num">${rank}</div>
-                            <div class="player-name">${p.name}</div>
-                            <div class="stat-val stat-hide">${p.twitch}</div>
-                            <div class="stat-val stat-hide">${p.discord}</div>
-                            <div class="total-val">${p.total}</div>
-                        </div>
+                    const row = document.createElement('div');
+                    row.className = `row ${i === 0 ? 'rank-1' : ''}`;
+                    row.innerHTML = `
+                        <div class="rank-num">${i + 1}</div>
+                        <div class="player-name">${p.name}</div>
+                        <div class="stat-hide">${p.twitch}</div>
+                        <div class="stat-hide">${p.discord}</div>
+                        <div class="total-val">${p.total}</div>
                     `;
+                    list.appendChild(row);
                 });
-            } catch (e) {
-                console.error("خطأ في جلب البيانات:", e);
+            } catch (error) {
+                console.error("Error fetching data:", error);
             }
         }
 
-        // تحديث كل 30 ثانية
-        updateLeaderboard();
-        setInterval(updateLeaderboard, 30000);
+        updateData();
+        setInterval(updateData, 30000); // تحديث كل 30 ثانية
     </script>
 </body>
 </html>
