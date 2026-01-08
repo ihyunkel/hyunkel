@@ -9,115 +9,99 @@
     
     <style>
         :root {
-            --bg-color: #050a15;
-            --card-bg: rgba(15, 25, 50, 0.75);
-            --primary-blue: #00d2ff;
+            --bg-dark: #030812;
+            --card-blue: rgba(16, 28, 55, 0.85);
+            --accent-blue: #00d2ff;
             --gold: #ffd700;
             --silver: #e0e0e0;
             --bronze: #cd7f32;
         }
 
-        /* تحسين شريط التمرير */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: var(--primary-blue); border-radius: 10px; }
-
         body {
             font-family: 'Cairo', sans-serif;
-            background: radial-gradient(circle at center, #0a1931 0%, #050a15 100%);
+            background: radial-gradient(circle at 50% 50%, #0a1e3d 0%, var(--bg-dark) 100%);
             color: #ffffff;
             margin: 0; padding: 20px; min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
             overflow-x: hidden;
         }
 
-        /* تحريك أيقونات الخلفية */
-        .bg-icon { 
-            position: fixed; color: var(--primary-blue); opacity: 0.05; z-index: 0; 
-            animation: float 6s ease-in-out infinite;
+        /* نمط الأيقونات في الخلفية - لمسات ثابتة */
+        .bg-pattern {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none; opacity: 0.05;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-        }
+        .p-icon { position: absolute; color: var(--accent-blue); }
 
-        .i1 { top: 5%; left: 5%; animation-delay: 0s; }
-        .i2 { top: 15%; right: 7%; animation-delay: 1s; }
-        .i3 { bottom: 10%; left: 8%; animation-delay: 2s; }
-        .i4 { bottom: 15%; right: 10%; animation-delay: 3s; }
-
-        .container { width: 100%; max-width: 850px; z-index: 2; position: relative; }
+        .container { width: 100%; max-width: 900px; z-index: 2; position: relative; }
         
-        header { text-align: center; margin-bottom: 40px; animation: fadeInDown 1s ease; }
+        header { text-align: center; margin-bottom: 50px; }
         
         .logo-img { 
-            max-width: 260px; width: 100%;
-            filter: drop-shadow(0 0 30px var(--primary-blue));
-            transition: transform 0.5s;
+            max-width: 250px; width: 100%; height: auto;
+            filter: drop-shadow(0 0 30px rgba(0, 210, 255, 0.4));
         }
-        .logo-img:hover { transform: scale(1.05); }
         
         .league-title { 
-            font-size: 3rem; font-weight: 900; color: #fff;
-            text-shadow: 0 0 20px var(--primary-blue);
-            margin-top: 15px; display: block;
+            font-size: 3.5rem; font-weight: 900; 
+            background: linear-gradient(180deg, #ffffff 30%, var(--accent-blue) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            margin: 10px 0; display: block;
         }
 
-        /* تنسيق الجدول */
+        /* الجدول */
         .table-header { 
-            display: grid; grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr;
-            padding: 15px; color: var(--primary-blue); font-weight: 700; opacity: 0.8;
+            display: grid; grid-template-columns: 0.6fr 2fr 1fr 1fr 1fr;
+            padding: 20px; color: #4b6b9e; font-weight: 900; letter-spacing: 1px;
         }
 
         .row { 
-            display: grid; grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr;
-            background: var(--card-bg); margin-bottom: 12px; padding: 20px; 
-            border-radius: 20px; border: 1px solid rgba(0, 210, 255, 0.1); 
-            backdrop-filter: blur(15px); transition: all 0.3s ease;
-            animation: fadeInUp 0.5s ease backwards;
-        }
-        .row:hover { transform: translateX(-5px); border-color: var(--primary-blue); }
-
-        .rank-num { font-size: 1.8rem; font-weight: 900; color: rgba(255,255,255,0.2); }
-        .player-name { font-size: 1.5rem; font-weight: 700; color: #e0e6ed; }
-        .stat-val { font-size: 1.4rem; color: #b0c4de; font-family: monospace; }
-        .total-val { font-size: 2.2rem; font-weight: 900; color: var(--primary-blue); }
-
-        /* تمييز المراكز الثلاثة الأولى */
-        .rank-1 { border: 2px solid var(--gold); animation: pulse-gold 2s infinite; }
-        .rank-1 .rank-num, .rank-1 .total-val { color: var(--gold) !important; text-shadow: 0 0 15px var(--gold); }
-
-        .rank-2 { border: 2px solid var(--silver); }
-        .rank-2 .rank-num, .rank-2 .total-val { color: var(--silver) !important; }
-
-        .rank-3 { border: 2px solid var(--bronze); }
-        .rank-3 .rank-num, .rank-3 .total-val { color: var(--bronze) !important; }
-
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+            display: grid; grid-template-columns: 0.6fr 2fr 1fr 1fr 1fr;
+            background: var(--card-blue); margin-bottom: 15px; padding: 22px; 
+            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            align-items: center; text-align: center;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .rank-num { font-size: 2rem; font-weight: 900; opacity: 0.3; }
+        .player-name { font-size: 1.6rem; font-weight: 700; color: #f0f4f8; text-align: right; padding-right: 20px; }
+        .stat-val { font-size: 1.5rem; color: #7e94b5; font-weight: 600; }
+        .total-val { font-size: 2.4rem; font-weight: 900; color: var(--accent-blue); }
+
+        /* تجميل المراكز الثلاثة الأولى */
+        .rank-1 { border: 1px solid rgba(255, 215, 0, 0.3); background: linear-gradient(90deg, rgba(255, 215, 0, 0.05), var(--card-blue)); }
+        .rank-1 .rank-num { color: var(--gold); opacity: 1; text-shadow: 0 0 15px var(--gold); }
+        .rank-1 .total-val { color: var(--gold); }
+
+        .rank-2 { border: 1px solid rgba(192, 192, 192, 0.2); }
+        .rank-2 .rank-num { color: var(--silver); opacity: 1; }
+        .rank-2 .total-val { color: var(--silver); }
+
+        .rank-3 { border: 1px solid rgba(205, 127, 50, 0.2); }
+        .rank-3 .rank-num { color: var(--bronze); opacity: 1; }
+        .rank-3 .total-val { color: var(--bronze); }
 
         @media (max-width: 650px) {
-            .logo-img { max-width: 150px; }
-            .league-title { font-size: 1.8rem; }
-            .table-header, .row { grid-template-columns: 0.4fr 2fr 1fr; }
+            .logo-img { max-width: 170px; }
+            .league-title { font-size: 2.2rem; }
+            .table-header, .row { grid-template-columns: 0.5fr 2fr 1.2fr; }
             .stat-hide { display: none; }
+            .player-name { font-size: 1.2rem; padding-right: 10px; }
+            .total-val { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <i class="fas fa-trophy bg-icon i1"></i>
-    <i class="fas fa-star bg-icon i2"></i>
-    <i class="fas fa-crown bg-icon i3"></i>
-    <i class="fas fa-gamepad bg-icon i4"></i>
+    <div class="bg-pattern">
+        <i class="fas fa-trophy p-icon" style="top:10%; left:5%; font-size:8rem;"></i>
+        <i class="fas fa-star p-icon" style="top:20%; right:10%; font-size:4rem;"></i>
+        <i class="fas fa-crown p-icon" style="top:50%; left:2%; font-size:6rem;"></i>
+        <i class="fas fa-gamepad p-icon" style="bottom:10%; right:5%; font-size:9rem;"></i>
+        <i class="fas fa-medal p-icon" style="bottom:20%; left:10%; font-size:5rem;"></i>
+        <i class="fas fa-futbol p-icon" style="top:70%; right:15%; font-size:7rem;"></i>
+    </div>
 
     <div class="container">
         <header>
@@ -126,10 +110,11 @@
         </header>
 
         <div class="table-header">
-            <div>#</div><div>اللاعب</div><div class="stat-hide">تويتش</div><div class="stat-hide">ديسكورد</div><div>المجموع</div>
+            <div>#</div><div style="text-align: right; padding-right: 20px;">اللاعب</div><div class="stat-hide">تويتش</div><div class="stat-hide">ديسكورد</div><div>المجموع</div>
         </div>
 
-        <div id="leaderboard"></div>
+        <div id="leaderboard">
+            </div>
     </div>
 
     <script>
@@ -139,13 +124,15 @@
             try {
                 const response = await fetch(SHEET_URL);
                 const data = await response.text();
+                if (!data || data.includes('<html')) return;
+
                 const rows = data.split('\n').map(r => r.trim()).filter(r => r !== "");
-                
                 let players = rows.slice(1).map(row => {
                     const cols = row.split(',');
+                    const name = cols[0] ? cols[0].replace(/"/g, '') : 'لاعب';
                     const twitch = parseInt(cols[1]) || 0;
                     const discord = parseInt(cols[2]) || 0;
-                    return { name: cols[0]?.replace(/"/g, '') || 'لاعب', twitch, discord, total: twitch + discord };
+                    return { name, twitch, discord, total: twitch + discord };
                 });
 
                 players.sort((a, b) => b.total - a.total);
@@ -153,9 +140,9 @@
                 const list = document.getElementById('leaderboard');
                 list.innerHTML = players.map((p, i) => {
                     const rank = i + 1;
-                    const rankClass = rank <= 3 ? `rank-${rank}` : '';
+                    let rankClass = rank <= 3 ? `rank-${rank}` : '';
                     return `
-                        <div class="row ${rankClass}" style="animation-delay: ${i * 0.1}s">
+                        <div class="row ${rankClass}">
                             <div class="rank-num">${rank}</div>
                             <div class="player-name">${p.name}</div>
                             <div class="stat-val stat-hide">${p.twitch}</div>
@@ -164,7 +151,7 @@
                         </div>
                     `;
                 }).join('');
-            } catch (e) { console.error("Error updates"); }
+            } catch (e) { console.error(e); }
         }
 
         updateLeaderboard();
