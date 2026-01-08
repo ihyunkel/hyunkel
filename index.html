@@ -27,35 +27,35 @@
             overflow-x: hidden; position: relative;
         }
 
-        /* نظام 10 أيقونات في الخلفية */
+        /* --- توزيع متوازن للأيقونات (يمنة ويسرة) --- */
         .bg-icon { position: fixed; color: var(--primary-blue); opacity: 0.04; z-index: 0; pointer-events: none; }
-        .i1 { top: 5%; left: 5%; font-size: 5rem; transform: rotate(-15deg); }
-        .i2 { top: 12%; right: 7%; font-size: 4rem; transform: rotate(20deg); }
-        .i3 { top: 40%; left: 3%; font-size: 6rem; transform: rotate(10deg); }
-        .i4 { top: 35%; right: 4%; font-size: 5rem; transform: rotate(-20deg); }
-        .i5 { bottom: 8%; left: 10%; font-size: 7rem; transform: rotate(15deg); }
-        .i6 { bottom: 12%; right: 10%; font-size: 4rem; transform: rotate(-10deg); }
-        .i7 { top: 65%; left: 18%; font-size: 4.5rem; transform: rotate(5deg); }
-        .i8 { bottom: 45%; right: 3%; font-size: 5.5rem; transform: rotate(30deg); }
-        .i9 { top: 25%; left: 22%; font-size: 3.5rem; transform: rotate(-12deg); }
-        .i10 { bottom: 30%; left: 5%; font-size: 4.5rem; transform: rotate(-40deg); }
+        
+        /* الجهة اليسرى */
+        .i1 { top: 5%; left: 3%; font-size: 5rem; transform: rotate(-15deg); }
+        .i2 { top: 25%; left: 8%; font-size: 3.5rem; transform: rotate(10deg); }
+        .i3 { top: 50%; left: 2%; font-size: 6rem; transform: rotate(-10deg); }
+        .i4 { bottom: 25%; left: 7%; font-size: 4.5rem; transform: rotate(20deg); }
+        .i5 { bottom: 5%; left: 4%; font-size: 5.5rem; transform: rotate(-5deg); }
+
+        /* الجهة اليمنى */
+        .i6 { top: 5%; right: 3%; font-size: 4rem; transform: rotate(15deg); }
+        .i7 { top: 25%; right: 8%; font-size: 3rem; transform: rotate(-20deg); }
+        .i8 { top: 50%; right: 2%; font-size: 5.5rem; transform: rotate(12deg); }
+        .i9 { bottom: 25%; right: 7%; font-size: 4rem; transform: rotate(-15deg); }
+        .i10 { bottom: 5%; right: 4%; font-size: 6.5rem; transform: rotate(25deg); }
 
         .container { width: 100%; max-width: 850px; z-index: 2; position: relative; }
         header { text-align: center; margin-bottom: 30px; }
         
         .logo-img { 
-            max-width: 280px; 
-            width: 100%;
-            height: auto; 
+            max-width: 280px; width: 100%; height: auto; 
             filter: drop-shadow(0 0 25px var(--primary-blue)); 
         }
         
         .league-title { 
             font-size: 3.2rem; font-weight: 900; 
-            color: #ffffff;
-            text-shadow: 0 0 15px var(--primary-blue);
-            margin: 10px 0;
-            display: block;
+            color: #ffffff; text-shadow: 0 0 15px var(--primary-blue);
+            margin: 10px 0; display: block;
         }
 
         .table-header, .row { 
@@ -69,8 +69,7 @@
         .row { 
             background: var(--card-bg); margin-bottom: 12px; padding: 18px; 
             border-radius: 18px; border: 1px solid rgba(0, 210, 255, 0.1); 
-            backdrop-filter: blur(12px); 
-            position: relative; overflow: hidden;
+            backdrop-filter: blur(12px); position: relative; overflow: hidden;
         }
 
         .rank-num { font-size: 1.8rem; font-weight: 900; color: #445b80; z-index: 2; }
@@ -80,7 +79,6 @@
 
         /* لمسات التوب 3 */
         .rank-1, .rank-2, .rank-3 { background: linear-gradient(135deg, rgba(20, 30, 60, 0.9), rgba(10, 20, 40, 0.8)); }
-
         .rank-1::after, .rank-2::after, .rank-3::after {
             font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute;
             left: 5%; top: 50%; transform: translateY(-50%); font-size: 4.5rem; opacity: 0.1; z-index: 1;
@@ -108,6 +106,7 @@
             .rank-num { font-size: 1.4rem; }
             .total-val { font-size: 1.6rem; }
             .rank-1::after, .rank-2::after, .rank-3::after { font-size: 2.5rem; left: 2%; }
+            .bg-icon { display: none; } /* إخفاء الأيقونات في الجوال لتقليل الزحمة */
         }
     </style>
 </head>
@@ -115,14 +114,15 @@
 
     <i class="fas fa-trophy bg-icon i1"></i>
     <i class="fas fa-gamepad bg-icon i2"></i>
-    <i class="fas fa-camera bg-icon i3"></i>
-    <i class="fas fa-paint-brush bg-icon i4"></i>
-    <i class="fas fa-star bg-icon i5"></i>
+    <i class="fas fa-star bg-icon i3"></i>
+    <i class="fas fa-medal bg-icon i4"></i>
+    <i class="fas fa-crown bg-icon i5"></i>
+
     <i class="fas fa-futbol bg-icon i6"></i>
-    <i class="fas fa-medal bg-icon i7"></i>
+    <i class="fas fa-rocket bg-icon i7"></i>
     <i class="fas fa-ghost bg-icon i8"></i>
-    <i class="fas fa-crown bg-icon i9"></i>
-    <i class="fas fa-rocket bg-icon i10"></i>
+    <i class="fas fa-camera bg-icon i9"></i>
+    <i class="fas fa-paint-brush bg-icon i10"></i>
 
     <div class="container">
         <header>
