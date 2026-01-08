@@ -18,6 +18,7 @@
 
         body {
             font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
             background: radial-gradient(circle at center, #0a1931 0%, #050a15 100%);
             color: var(--text-white);
             margin: 0; padding: 20px; min-height: 100vh;
@@ -25,23 +26,31 @@
             overflow-x: hidden; position: relative;
         }
 
-        .bg-icon { position: fixed; color: var(--primary-blue); opacity: 0.03; z-index: -1; pointer-events: none; }
+        /* إعادة أيقونات الخلفية بدقة */
+        .bg-icon {
+            position: fixed;
+            color: var(--primary-blue);
+            opacity: 0.05; /* زدت الشفافية قليلاً لتظهر بوضوح */
+            z-index: 0;
+            pointer-events: none;
+        }
         .icon-1 { top: 5%; left: 5%; font-size: 8rem; transform: rotate(-15deg); }
         .icon-2 { top: 70%; right: 5%; font-size: 10rem; transform: rotate(20deg); }
+        .icon-3 { top: 30%; left: 85%; font-size: 7rem; transform: rotate(-10deg); }
+        .icon-4 { bottom: 5%; left: 10%; font-size: 9rem; transform: rotate(15deg); }
+        .icon-5 { top: 15%; right: 15%; font-size: 6rem; transform: rotate(35deg); }
 
-        .container { width: 100%; max-width: 800px; z-index: 1; }
+        .container { width: 100%; max-width: 800px; z-index: 2; position: relative; }
+        
         header { text-align: center; margin-bottom: 40px; }
         .logo-img { max-width: 400px; height: auto; filter: drop-shadow(0 0 30px var(--primary-blue)); margin-bottom: -10px; }
         
-        /* تأكدنا من ظهور العنوان هنا */
-        h1 { 
-            font-size: 3rem; 
-            font-weight: 900; 
+        /* تثبيت ظهور الاسم تحت الشعار */
+        .league-title { 
+            font-size: 3rem; font-weight: 900; 
             background: linear-gradient(to bottom, #fff, var(--primary-blue)); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            margin-top: 20px; 
-            display: block !important; 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            margin: 0; display: block;
         }
 
         .table-header, .row { 
@@ -51,8 +60,13 @@
         }
 
         .table-header { padding: 15px; color: #5d7ba7; font-weight: 700; font-size: 1rem; }
-        .row { background: var(--card-bg); margin-bottom: 12px; padding: 15px; border-radius: 15px; border: 1px solid rgba(0, 210, 255, 0.1); backdrop-filter: blur(10px); }
         
+        .row { 
+            background: var(--card-bg); margin-bottom: 12px; padding: 15px; 
+            border-radius: 15px; border: 1px solid rgba(0, 210, 255, 0.1); 
+            backdrop-filter: blur(10px); transition: 0.3s;
+        }
+
         .rank-num { font-size: 1.6rem; font-weight: 900; color: #445b80; }
         .player-name { font-size: 1.3rem; font-weight: 700; color: #e0e6ed; }
         .total-val { font-size: 1.7rem; font-weight: 900; color: var(--primary-blue); }
@@ -64,18 +78,22 @@
             .table-header, .row { grid-template-columns: 0.5fr 2fr 1fr; }
             .stat-hide { display: none; }
             .logo-img { max-width: 250px; }
-            h1 { font-size: 2rem; }
+            .league-title { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
+    <i class="fas fa-futbol bg-icon icon-1"></i>
     <i class="fas fa-trophy bg-icon icon-2"></i>
+    <i class="fas fa-camera bg-icon icon-3"></i>
+    <i class="fas fa-paint-brush bg-icon icon-4"></i>
+    <i class="fas fa-gamepad bg-icon icon-5"></i>
 
     <div class="container">
         <header>
             <img src="logo.png" class="logo-img" alt="Logo">
-            <h1>دوري هيونكل الموسمي</h1>
+            <h1 class="league-title">دوري هيونكل الموسمي</h1>
         </header>
 
         <div class="table-header">
@@ -83,60 +101,52 @@
         </div>
 
         <div id="leaderboard">
-            <div style="text-align:center; padding:50px; color:var(--primary-blue);">جاري تحميل النتائج المباشرة...</div>
-        </div>
+            </div>
     </div>
 
     <script>
-        // استبدل الرابط أدناه برابط الـ CSV الخاص بك من جوجل شيت
         const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJiQ3Jz9lj4LDG_iP-LOEFS6Oz57ODw4JzxJWZjQT9bJ93ZHQsPrU4Ycr45JDllxFc6smJxqKATkLL/pub?gid=0&single=true&output=csv';
 
-        async function updateData() {
+        async function updateLeaderboard() {
             try {
                 const response = await fetch(SHEET_URL);
-                const csvText = await response.text();
+                const data = await response.text();
                 
-                // تنظيف ومنع قراءة أي أكواد HTML في حال كان الرابط خطأ
-                if (csvText.includes('<html')) {
-                    document.getElementById('leaderboard').innerHTML = "<div style='color:red; text-align:center;'>خطأ: تأكد من اختيار (CSV) عند النشر من جوجل شيت</div>";
-                    return;
-                }
+                // التأكد من أن البيانات ليست صفحة HTML
+                if (data.includes('<html')) return;
 
-                const rows = csvText.split('\n').map(r => r.trim()).filter(r => r !== "");
+                const rows = data.split('\n').map(r => r.trim()).filter(r => r !== "");
                 
                 let players = rows.slice(1).map(row => {
                     const cols = row.split(',');
-                    const name = cols[0] ? cols[0].replace(/"/g, '') : 'غير معروف';
+                    const name = cols[0] ? cols[0].replace(/"/g, '') : 'لاعب';
                     const twitch = parseInt(cols[1]) || 0;
                     const discord = parseInt(cols[2]) || 0;
                     return { name, twitch, discord, total: twitch + discord };
                 });
 
-                // ترتيب اللاعبين حسب المجموع تنازلياً
                 players.sort((a, b) => b.total - a.total);
 
                 const list = document.getElementById('leaderboard');
                 list.innerHTML = "";
                 
                 players.forEach((p, i) => {
-                    const row = document.createElement('div');
-                    row.className = `row ${i === 0 ? 'rank-1' : ''}`;
-                    row.innerHTML = `
-                        <div class="rank-num">${i + 1}</div>
-                        <div class="player-name">${p.name}</div>
-                        <div class="stat-hide">${p.twitch}</div>
-                        <div class="stat-hide">${p.discord}</div>
-                        <div class="total-val">${p.total}</div>
+                    const isTop = i === 0 ? 'rank-1' : '';
+                    list.innerHTML += `
+                        <div class="row ${isTop}">
+                            <div class="rank-num">${i + 1}</div>
+                            <div class="player-name">${p.name}</div>
+                            <div class="stat-hide">${p.twitch}</div>
+                            <div class="stat-hide">${p.discord}</div>
+                            <div class="total-val">${p.total}</div>
+                        </div>
                     `;
-                    list.appendChild(row);
                 });
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
+            } catch (e) { console.log(e); }
         }
 
-        updateData();
-        setInterval(updateData, 30000); // تحديث كل 30 ثانية
+        updateLeaderboard();
+        setInterval(updateLeaderboard, 20000);
     </script>
 </body>
 </html>
