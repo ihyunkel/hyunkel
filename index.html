@@ -27,32 +27,27 @@
             overflow-x: hidden; position: relative;
         }
 
-        /* --- توزيع الأيقونات في المناطق الجانبية (بين الطرف والمنتصف) --- */
+        /* أيقونات الخلفية (للكومبيوتر فقط) */
         .bg-icon { position: fixed; color: var(--primary-blue); opacity: 0.04; z-index: 0; pointer-events: none; }
-        
-        /* أيقونات الجهة اليسرى (موزعة بين 5% و 25% من العرض) */
-        .i1 { top: 8%; left: 5%; font-size: 5rem; transform: rotate(-15deg); }
-        .i2 { top: 30%; left: 22%; font-size: 4rem; transform: rotate(10deg); }
-        .i3 { top: 55%; left: 12%; font-size: 6rem; transform: rotate(-10deg); }
-        .i4 { top: 80%; left: 20%; font-size: 4.5rem; transform: rotate(20deg); }
-        .i5 { top: 45%; left: 4%; font-size: 3.5rem; transform: rotate(-25deg); }
-
-        /* أيقونات الجهة اليمنى (موزعة بين 5% و 25% من العرض) */
-        .i6 { top: 8%; right: 5%; font-size: 5rem; transform: rotate(15deg); }
-        .i7 { top: 30%; right: 22%; font-size: 4rem; transform: rotate(-10deg); }
-        .i8 { top: 55%; right: 12%; font-size: 6rem; transform: rotate(12deg); }
-        .i9 { top: 80%; right: 20%; font-size: 4.5rem; transform: rotate(-15deg); }
-        .i10 { top: 45%; right: 4%; font-size: 3.5rem; transform: rotate(25deg); }
+        .i1 { top: 10%; left: 8%; font-size: 5rem; transform: rotate(-15deg); }
+        .i2 { top: 35%; left: 18%; font-size: 4rem; transform: rotate(10deg); }
+        .i3 { top: 60%; left: 10%; font-size: 6.5rem; transform: rotate(-10deg); }
+        .i4 { bottom: 15%; left: 20%; font-size: 4.5rem; transform: rotate(20deg); }
+        .i5 { top: 48%; left: 5%; font-size: 3.5rem; transform: rotate(-25deg); }
+        .i6 { top: 10%; right: 8%; font-size: 5rem; transform: rotate(15deg); }
+        .i7 { top: 35%; right: 18%; font-size: 4rem; transform: rotate(-10deg); }
+        .i8 { top: 60%; right: 10%; font-size: 6.5rem; transform: rotate(12deg); }
+        .i9 { bottom: 15%; right: 20%; font-size: 4.5rem; transform: rotate(-15deg); }
+        .i10 { top: 48%; right: 5%; font-size: 3.5rem; transform: rotate(25deg); }
 
         .container { width: 100%; max-width: 850px; z-index: 2; position: relative; }
         header { text-align: center; margin-bottom: 30px; }
         
         .logo-img { max-width: 280px; width: 100%; height: auto; filter: drop-shadow(0 0 25px var(--primary-blue)); }
-        .league-title { font-size: 3.2rem; font-weight: 900; color: #ffffff; text-shadow: 0 0 15px var(--primary-blue); margin: 10px 0; display: block; }
+        .league-title { font-size: 3.2rem; font-weight: 900; text-shadow: 0 0 15px var(--primary-blue); margin: 10px 0; display: block; }
 
         .table-header, .row { 
-            display: grid; 
-            grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr; 
+            display: grid; grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr; 
             align-items: center; text-align: center;
         }
 
@@ -64,42 +59,40 @@
             backdrop-filter: blur(12px); position: relative; overflow: hidden;
         }
 
-        /* تنسيق الاسم: توسط مع LTR لضمان صحة الرموز */
         .player-name { 
             font-size: 1.5rem; font-weight: 700; color: #e0e6ed; z-index: 2;
             direction: ltr; text-align: center; 
         }
 
-        .rank-num { font-size: 1.8rem; font-weight: 900; color: #445b80; z-index: 2; }
-        .stat-val { font-size: 1.4rem; font-weight: 700; color: #b0c4de; z-index: 2; }
-        .total-val { font-size: 2.2rem; font-weight: 900; color: var(--primary-blue); z-index: 2; }
+        .rank-num { font-size: 1.8rem; font-weight: 900; color: #445b80; }
+        .total-val { font-size: 2.2rem; font-weight: 900; color: var(--primary-blue); }
 
-        /* التوب 3 */
-        .rank-1, .rank-2, .rank-3 { background: linear-gradient(135deg, rgba(20, 30, 60, 0.9), rgba(10, 20, 40, 0.8)); }
-        .rank-1::after, .rank-2::after, .rank-3::after {
-            font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute;
-            left: 5%; top: 50%; transform: translateY(-50%); font-size: 4.5rem; opacity: 0.1; z-index: 1;
-        }
-        .rank-1 { border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
-        .rank-1::after { content: "\f091"; color: var(--gold); }
-        .rank-1 .rank-num, .rank-1 .total-val { color: var(--gold) !important; }
+        .rank-1 { border: 2px solid var(--gold); }
         .rank-2 { border: 2px solid var(--silver); }
-        .rank-2::after { content: "\f5a2"; color: var(--silver); }
-        .rank-2 .rank-num, .rank-2 .total-val { color: var(--silver) !important; }
         .rank-3 { border: 2px solid var(--bronze); }
-        .rank-3::after { content: "\f559"; color: var(--bronze); }
-        .rank-3 .rank-num, .rank-3 .total-val { color: var(--bronze) !important; }
 
-        @media (max-width: 900px) {
-            .bg-icon { display: none; } /* إخفاء الأيقونات في الشاشات الصغيرة لتفادي الزحمة */
-        }
-
+        /* --- إعدادات الجوال المتوافقة والأنيقة --- */
         @media (max-width: 650px) {
             body { padding: 10px; }
-            .logo-img { max-width: 160px; }
-            .league-title { font-size: 1.6rem; }
-            .table-header, .row { grid-template-columns: 0.4fr 2fr 1fr; padding: 10px; }
-            .stat-hide { display: none; }
+            .bg-icon { display: none; } /* إخفاء الزحمة في الخلفية */
+            
+            .logo-img { max-width: 140px; }
+            .league-title { font-size: 1.5rem; margin-bottom: 15px; }
+            
+            .table-header { font-size: 0.85rem; padding: 10px 5px; }
+            
+            .row { 
+                grid-template-columns: 0.4fr 1.8fr 1fr; /* ترتيب أنسب للجوال */
+                padding: 12px 8px;
+                border-radius: 12px;
+                margin-bottom: 8px;
+            }
+
+            .stat-hide { display: none; } /* إخفاء التفاصيل الجانبية لتركيز المساحة */
+            
+            .player-name { font-size: 1rem; }
+            .rank-num { font-size: 1.2rem; }
+            .total-val { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -118,7 +111,7 @@
         </header>
 
         <div class="table-header">
-            <div>#</div><div>اللاعب</div><div class="stat-hide">تويتش</div><div class="stat-hide">دسكورد</div><div>المجموع</div>
+            <div>#</div><div>اللاعب</div><div class="stat-hide">تويتش</div><div class="stat-hide">ديسكورد</div><div>المجموع</div>
         </div>
         <div id="leaderboard"></div>
     </div>
@@ -149,7 +142,6 @@
                 players.forEach((p, i) => {
                     const rank = i + 1;
                     let rankClass = rank <= 3 ? `rank-${rank}` : "";
-
                     list.innerHTML += `
                         <div class="row ${rankClass}">
                             <div class="rank-num">${rank}</div>
@@ -168,4 +160,3 @@
     </script>
 </body>
 </html>
-
