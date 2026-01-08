@@ -27,39 +27,40 @@
             overflow-x: hidden; position: relative;
         }
 
-        /* أيقونات خلفية مكثفة */
+        /* نظام أيقونات خلفية مكثف */
         .bg-icon {
             position: fixed; color: var(--primary-blue);
             opacity: 0.04; z-index: 0; pointer-events: none;
         }
-        /* توزيع عشوائي ومنظم للأيقونات */
         .i1 { top: 5%; left: 5%; font-size: 5rem; transform: rotate(-15deg); }
-        .i2 { top: 15%; right: 10%; font-size: 4rem; transform: rotate(20deg); }
-        .i3 { top: 40%; left: 2%; font-size: 6rem; transform: rotate(10deg); }
-        .i4 { top: 35%; right: 5%; font-size: 5rem; transform: rotate(-20deg); }
-        .i5 { bottom: 10%; left: 8%; font-size: 7rem; transform: rotate(15deg); }
-        .i6 { bottom: 15%; right: 12%; font-size: 4rem; transform: rotate(-10deg); }
-        .i7 { top: 60%; left: 15%; font-size: 3rem; opacity: 0.02; }
-        .i8 { bottom: 40%; right: 2%; font-size: 5rem; transform: rotate(45deg); }
-        .i9 { top: 25%; left: 25%; font-size: 3rem; }
+        .i2 { top: 12%; right: 7%; font-size: 4rem; transform: rotate(20deg); }
+        .i3 { top: 40%; left: 3%; font-size: 6rem; transform: rotate(10deg); }
+        .i4 { top: 35%; right: 4%; font-size: 5rem; transform: rotate(-20deg); }
+        .i5 { bottom: 8%; left: 10%; font-size: 7rem; transform: rotate(15deg); }
+        .i6 { bottom: 12%; right: 10%; font-size: 4rem; transform: rotate(-10deg); }
+        .i7 { top: 65%; left: 18%; font-size: 4rem; }
+        .i8 { bottom: 45%; right: 3%; font-size: 5.5rem; transform: rotate(30deg); }
+        .i9 { top: 25%; left: 22%; font-size: 3.5rem; }
+        .i10 { bottom: 30%; left: 5%; font-size: 4.5rem; transform: rotate(-40deg); }
+        .i11 { top: 50%; right: 15%; font-size: 3rem; }
+        .i12 { top: 80%; left: 40%; font-size: 5rem; opacity: 0.02; }
 
         .container { width: 100%; max-width: 850px; z-index: 2; position: relative; }
         
-        header { text-align: center; margin-bottom: 40px; }
+        header { text-align: center; margin-bottom: 30px; }
         
-        /* تكبير الشعار */
+        /* ضبط حجم الشعار */
         .logo-img { 
-            max-width: 450px; /* زيادة الحجم */
+            max-width: 280px; 
             width: 100%;
             height: auto; 
-            filter: drop-shadow(0 0 35px var(--primary-blue)); 
+            filter: drop-shadow(0 0 25px var(--primary-blue)); 
         }
         
-        /* إصلاح النص النهائي */
         .league-title { 
-            font-size: 3.8rem; font-weight: 900; 
+            font-size: 3.2rem; font-weight: 900; 
             color: #ffffff;
-            text-shadow: 0 0 15px var(--primary-blue), 0 0 30px rgba(0, 210, 255, 0.5);
+            text-shadow: 0 0 15px var(--primary-blue);
             margin: 10px 0;
             display: block;
         }
@@ -75,28 +76,30 @@
         .row { 
             background: var(--card-bg); margin-bottom: 12px; padding: 18px; 
             border-radius: 18px; border: 1px solid rgba(0, 210, 255, 0.1); 
-            backdrop-filter: blur(12px); transition: 0.3s ease;
+            backdrop-filter: blur(12px); 
         }
 
         .rank-num { font-size: 1.8rem; font-weight: 900; color: #445b80; }
         .player-name { font-size: 1.5rem; font-weight: 700; color: #e0e6ed; }
-        .total-val { font-size: 2rem; font-weight: 900; color: var(--primary-blue); }
+        
+        /* تكبير أرقام تويتش وديسكورد */
+        .stat-val { font-size: 1.4rem; font-weight: 700; color: #b0c4de; }
+        .total-val { font-size: 2.2rem; font-weight: 900; color: var(--primary-blue); }
 
-        /* تأثيرات المعادن والمراكز */
-        .rank-1 { border: 2px solid var(--gold); box-shadow: 0 0 25px rgba(255, 215, 0, 0.2); }
+        .rank-1 { border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
         .rank-1 .rank-num { color: var(--gold); }
 
-        .rank-2 { border: 2px solid var(--silver); box-shadow: 0 0 20px rgba(224, 224, 224, 0.15); }
+        .rank-2 { border: 2px solid var(--silver); box-shadow: 0 0 15px rgba(224, 224, 224, 0.15); }
         .rank-2 .rank-num { color: var(--silver); }
 
-        .rank-3 { border: 2px solid var(--bronze); box-shadow: 0 0 20px rgba(205, 127, 50, 0.15); }
+        .rank-3 { border: 2px solid var(--bronze); box-shadow: 0 0 15px rgba(205, 127, 50, 0.15); }
         .rank-3 .rank-num { color: var(--bronze); }
 
         @media (max-width: 650px) {
             .table-header, .row { grid-template-columns: 0.5fr 2fr 1.2fr; }
             .stat-hide { display: none; }
-            .league-title { font-size: 2.2rem; }
-            .logo-img { max-width: 300px; }
+            .league-title { font-size: 2rem; }
+            .logo-img { max-width: 200px; }
         }
     </style>
 </head>
@@ -111,6 +114,9 @@
     <i class="fas fa-medal bg-icon i7"></i>
     <i class="fas fa-ghost bg-icon i8"></i>
     <i class="fas fa-crown bg-icon i9"></i>
+    <i class="fas fa-rocket bg-icon i10"></i>
+    <i class="fas fa-fire bg-icon i11"></i>
+    <i class="fas fa-heart bg-icon i12"></i>
 
     <div class="container">
         <header>
@@ -123,7 +129,7 @@
         </div>
 
         <div id="leaderboard">
-            <div style="text-align:center; padding:50px; color:var(--primary-blue);">جاري التحديث...</div>
+            <div style="text-align:center; padding:50px; color:var(--primary-blue);">جاري التحديث المباشر...</div>
         </div>
     </div>
 
@@ -161,8 +167,8 @@
                         <div class="row ${rankClass}">
                             <div class="rank-num">${rank}</div>
                             <div class="player-name">${p.name}</div>
-                            <div class="stat-hide">${p.twitch}</div>
-                            <div class="stat-hide">${p.discord}</div>
+                            <div class="stat-val stat-hide">${p.twitch}</div>
+                            <div class="stat-val stat-hide">${p.discord}</div>
                             <div class="total-val">${p.total}</div>
                         </div>
                     `;
