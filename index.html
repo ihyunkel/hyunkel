@@ -27,18 +27,22 @@
             overflow-x: hidden; position: relative;
         }
 
-        /* توزيع متوازن للأيقونات في الخلفية */
+        /* --- توزيع الأيقونات بجانب الجدول مباشرة --- */
         .bg-icon { position: fixed; color: var(--primary-blue); opacity: 0.04; z-index: 0; pointer-events: none; }
-        .i1 { top: 5%; left: 3%; font-size: 5rem; transform: rotate(-15deg); }
-        .i2 { top: 25%; left: 8%; font-size: 3.5rem; transform: rotate(10deg); }
-        .i3 { top: 50%; left: 2%; font-size: 6rem; transform: rotate(-10deg); }
-        .i4 { bottom: 25%; left: 7%; font-size: 4.5rem; transform: rotate(20deg); }
-        .i5 { bottom: 5%; left: 4%; font-size: 5.5rem; transform: rotate(-5deg); }
-        .i6 { top: 5%; right: 3%; font-size: 4rem; transform: rotate(15deg); }
-        .i7 { top: 25%; right: 8%; font-size: 3rem; transform: rotate(-20deg); }
-        .i8 { top: 50%; right: 2%; font-size: 5.5rem; transform: rotate(12deg); }
-        .i9 { bottom: 25%; right: 7%; font-size: 4rem; transform: rotate(-15deg); }
-        .i10 { bottom: 5%; right: 4%; font-size: 6.5rem; transform: rotate(25deg); }
+        
+        /* أيقونات قريبة من يسار الجدول */
+        .i1 { top: 10%; left: calc(50% - 550px); font-size: 5rem; transform: rotate(-15deg); }
+        .i2 { top: 35%; left: calc(50% - 500px); font-size: 4rem; transform: rotate(10deg); }
+        .i3 { top: 60%; left: calc(50% - 580px); font-size: 6rem; transform: rotate(-10deg); }
+        .i4 { top: 85%; left: calc(50% - 520px); font-size: 4.5rem; transform: rotate(20deg); }
+        .i5 { top: 45%; left: calc(50% - 460px); font-size: 3rem; transform: rotate(-5deg); }
+
+        /* أيقونات قريبة من يمين الجدول */
+        .i6 { top: 10%; right: calc(50% - 550px); font-size: 5rem; transform: rotate(15deg); }
+        .i7 { top: 35%; right: calc(50% - 500px); font-size: 4rem; transform: rotate(-10deg); }
+        .i8 { top: 60%; right: calc(50% - 580px); font-size: 6rem; transform: rotate(12deg); }
+        .i9 { top: 85%; right: calc(50% - 520px); font-size: 4.5rem; transform: rotate(-15deg); }
+        .i10 { top: 45%; right: calc(50% - 460px); font-size: 3rem; transform: rotate(25deg); }
 
         .container { width: 100%; max-width: 850px; z-index: 2; position: relative; }
         header { text-align: center; margin-bottom: 30px; }
@@ -60,50 +64,42 @@
             backdrop-filter: blur(12px); position: relative; overflow: hidden;
         }
 
-        .rank-num { font-size: 1.8rem; font-weight: 900; color: #445b80; z-index: 2; }
-
-        /* --- الحل هنا: كتابة من اليسار لليمين مع بقاء المحاذاة في المنتصف --- */
         .player-name { 
-            font-size: 1.5rem; 
-            font-weight: 700; 
-            color: #e0e6ed; 
-            z-index: 2;
-            direction: ltr; /* كتابة الاسم من اليسار لليمين لإصلاح الرموز */
-            text-align: center; /* المحاذاة تبقى في المنتصف */
+            font-size: 1.5rem; font-weight: 700; color: #e0e6ed; z-index: 2;
+            direction: ltr; text-align: center; 
         }
 
+        .rank-num { font-size: 1.8rem; font-weight: 900; color: #445b80; z-index: 2; }
         .stat-val { font-size: 1.4rem; font-weight: 700; color: #b0c4de; z-index: 2; }
         .total-val { font-size: 2.2rem; font-weight: 900; color: var(--primary-blue); z-index: 2; }
 
-        /* لمسات التوب 3 */
         .rank-1, .rank-2, .rank-3 { background: linear-gradient(135deg, rgba(20, 30, 60, 0.9), rgba(10, 20, 40, 0.8)); }
         .rank-1::after, .rank-2::after, .rank-3::after {
             font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute;
             left: 5%; top: 50%; transform: translateY(-50%); font-size: 4.5rem; opacity: 0.1; z-index: 1;
         }
-
         .rank-1 { border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
         .rank-1::after { content: "\f091"; color: var(--gold); }
         .rank-1 .rank-num, .rank-1 .total-val { color: var(--gold) !important; }
-
-        .rank-2 { border: 2px solid var(--silver); box-shadow: 0 0 15px rgba(224, 224, 224, 0.15); }
+        .rank-2 { border: 2px solid var(--silver); }
         .rank-2::after { content: "\f5a2"; color: var(--silver); }
         .rank-2 .rank-num, .rank-2 .total-val { color: var(--silver) !important; }
-
-        .rank-3 { border: 2px solid var(--bronze); box-shadow: 0 0 15px rgba(205, 127, 50, 0.15); }
+        .rank-3 { border: 2px solid var(--bronze); }
         .rank-3::after { content: "\f559"; color: var(--bronze); }
         .rank-3 .rank-num, .rank-3 .total-val { color: var(--bronze) !important; }
+
+        @media (max-width: 1200px) {
+            /* عند صغر الشاشة نقرب الأيقونات أكثر لتجنب الاختفاء */
+            .i1, .i2, .i3, .i4, .i5 { left: 2%; }
+            .i6, .i7, .i8, .i9, .i10 { right: 2%; }
+        }
 
         @media (max-width: 650px) {
             body { padding: 10px; }
             .logo-img { max-width: 160px; }
-            .league-title { font-size: 1.6rem; margin: 5px 0 20px 0; }
+            .league-title { font-size: 1.6rem; }
             .table-header, .row { grid-template-columns: 0.4fr 2fr 1fr; padding: 10px; }
             .stat-hide { display: none; }
-            .player-name { font-size: 1.1rem; }
-            .rank-num { font-size: 1.4rem; }
-            .total-val { font-size: 1.6rem; }
-            .rank-1::after, .rank-2::after, .rank-3::after { font-size: 2.5rem; left: 2%; }
             .bg-icon { display: none; }
         }
     </style>
@@ -125,7 +121,6 @@
         <div class="table-header">
             <div>#</div><div>اللاعب</div><div class="stat-hide">تويتش</div><div class="stat-hide">ديسكورد</div><div>المجموع</div>
         </div>
-
         <div id="leaderboard"></div>
     </div>
 
