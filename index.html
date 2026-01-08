@@ -46,8 +46,10 @@
         .logo-img { max-width: 280px; width: 100%; height: auto; filter: drop-shadow(0 0 25px var(--primary-blue)); }
         .league-title { font-size: 3.2rem; font-weight: 900; text-shadow: 0 0 15px var(--primary-blue); margin: 10px 0; display: block; }
 
+        /* التوزيع الأساسي (سطح المكتب) */
         .table-header, .row { 
-            display: grid; grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr; 
+            display: grid; 
+            grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr; 
             align-items: center; text-align: center;
         }
 
@@ -67,7 +69,7 @@
         .rank-num { font-size: 1.8rem; font-weight: 900; color: #445b80; z-index: 2; }
         .total-val { font-size: 2.2rem; font-weight: 900; color: var(--primary-blue); z-index: 2; }
 
-        /* تأثيرات التوب 3 (الكؤوس الشفافة) */
+        /* تأثيرات التوب 3 */
         .rank-1, .rank-2, .rank-3 { background: linear-gradient(135deg, rgba(20, 30, 60, 0.9), rgba(10, 20, 40, 0.8)); }
         .rank-1::after, .rank-2::after, .rank-3::after {
             font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute;
@@ -86,29 +88,31 @@
         .rank-3::after { content: "\f559"; color: var(--bronze); }
         .rank-3 .rank-num, .rank-3 .total-val { color: var(--bronze) !important; }
 
-        /* إعدادات الجوال الأنيقة */
+        /* --- إصلاح الجوال --- */
         @media (max-width: 650px) {
             body { padding: 10px; }
             .bg-icon { display: none; }
             .logo-img { max-width: 140px; }
             .league-title { font-size: 1.5rem; }
             
-            .table-header { font-size: 0.85rem; padding: 10px 5px; }
-            .row { 
-                grid-template-columns: 0.4fr 1.8fr 1fr; 
+            /* توحيد توزيع الأعمدة بين العنوان والصفوف في الجوال */
+            .table-header, .row { 
+                grid-template-columns: 0.5fr 1.8fr 1fr; 
                 padding: 12px 8px;
-                border-radius: 12px;
             }
 
-            .stat-hide { display: none; }
-            .player-name { font-size: 1rem; }
-            .rank-num { font-size: 1.2rem; }
-            .total-val { font-size: 1.4rem; }
+            .table-header { font-size: 0.9rem; padding-bottom: 5px; }
+            .row { border-radius: 12px; margin-bottom: 8px; }
 
-            /* تصغير الكؤوس في الجوال */
+            .stat-hide { display: none; }
+            .player-name { font-size: 1.1rem; }
+            .rank-num { font-size: 1.3rem; }
+            .total-val { font-size: 1.5rem; }
+
+            /* أيقونات التوب 3 في الجوال */
             .rank-1::after, .rank-2::after, .rank-3::after {
-                font-size: 2.2rem;
-                left: 2%;
+                font-size: 2.5rem;
+                left: 3%;
             }
         }
     </style>
@@ -128,7 +132,7 @@
         </header>
 
         <div class="table-header">
-            <div>#</div><div>اللاعب</div><div class="stat-hide">تويتش</div><div class="stat-hide">ديسكورد</div><div>المجموع</div>
+            <div>#</div><div>اللاعب</div><div>المجموع</div>
         </div>
         <div id="leaderboard"></div>
     </div>
@@ -163,8 +167,6 @@
                         <div class="row ${rankClass}">
                             <div class="rank-num">${rank}</div>
                             <div class="player-name">${p.name}</div>
-                            <div class="stat-val stat-hide">${p.twitch}</div>
-                            <div class="stat-val stat-hide">${p.discord}</div>
                             <div class="total-val">${p.total}</div>
                         </div>
                     `;
