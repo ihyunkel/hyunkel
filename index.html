@@ -27,18 +27,18 @@
             overflow-x: hidden; position: relative;
         }
 
-        /* أيقونات الخلفية (للكومبيوتر فقط) */
+        /* أيقونات الخلفية (للكومبيوتر) */
         .bg-icon { position: fixed; color: var(--primary-blue); opacity: 0.04; z-index: 0; pointer-events: none; }
-        .i1 { top: 10%; left: 8%; font-size: 5rem; transform: rotate(-15deg); }
-        .i2 { top: 35%; left: 18%; font-size: 4rem; transform: rotate(10deg); }
-        .i3 { top: 60%; left: 10%; font-size: 6.5rem; transform: rotate(-10deg); }
-        .i4 { bottom: 15%; left: 20%; font-size: 4.5rem; transform: rotate(20deg); }
-        .i5 { top: 48%; left: 5%; font-size: 3.5rem; transform: rotate(-25deg); }
-        .i6 { top: 10%; right: 8%; font-size: 5rem; transform: rotate(15deg); }
-        .i7 { top: 35%; right: 18%; font-size: 4rem; transform: rotate(-10deg); }
-        .i8 { top: 60%; right: 10%; font-size: 6.5rem; transform: rotate(12deg); }
-        .i9 { bottom: 15%; right: 20%; font-size: 4.5rem; transform: rotate(-15deg); }
-        .i10 { top: 48%; right: 5%; font-size: 3.5rem; transform: rotate(25deg); }
+        .i1 { top: 10%; left: 8%; font-size: 5rem; }
+        .i2 { top: 35%; left: 18%; font-size: 4rem; }
+        .i3 { top: 60%; left: 10%; font-size: 6.5rem; }
+        .i4 { bottom: 15%; left: 20%; font-size: 4.5rem; }
+        .i5 { top: 48%; left: 5%; font-size: 3.5rem; }
+        .i6 { top: 10%; right: 8%; font-size: 5rem; }
+        .i7 { top: 35%; right: 18%; font-size: 4rem; }
+        .i8 { top: 60%; right: 10%; font-size: 6.5rem; }
+        .i9 { bottom: 15%; right: 20%; font-size: 4.5rem; }
+        .i10 { top: 48%; right: 5%; font-size: 3.5rem; }
 
         .container { width: 100%; max-width: 850px; z-index: 2; position: relative; }
         header { text-align: center; margin-bottom: 30px; }
@@ -64,35 +64,52 @@
             direction: ltr; text-align: center; 
         }
 
-        .rank-num { font-size: 1.8rem; font-weight: 900; color: #445b80; }
-        .total-val { font-size: 2.2rem; font-weight: 900; color: var(--primary-blue); }
+        .rank-num { font-size: 1.8rem; font-weight: 900; color: #445b80; z-index: 2; }
+        .total-val { font-size: 2.2rem; font-weight: 900; color: var(--primary-blue); z-index: 2; }
+
+        /* تأثيرات التوب 3 (الكؤوس الشفافة) */
+        .rank-1, .rank-2, .rank-3 { background: linear-gradient(135deg, rgba(20, 30, 60, 0.9), rgba(10, 20, 40, 0.8)); }
+        .rank-1::after, .rank-2::after, .rank-3::after {
+            font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute;
+            left: 5%; top: 50%; transform: translateY(-50%); font-size: 4.5rem; opacity: 0.1; z-index: 1;
+        }
 
         .rank-1 { border: 2px solid var(--gold); }
-        .rank-2 { border: 2px solid var(--silver); }
-        .rank-3 { border: 2px solid var(--bronze); }
+        .rank-1::after { content: "\f091"; color: var(--gold); }
+        .rank-1 .rank-num, .rank-1 .total-val { color: var(--gold) !important; }
 
-        /* --- إعدادات الجوال المتوافقة والأنيقة --- */
+        .rank-2 { border: 2px solid var(--silver); }
+        .rank-2::after { content: "\f5a2"; color: var(--silver); }
+        .rank-2 .rank-num, .rank-2 .total-val { color: var(--silver) !important; }
+
+        .rank-3 { border: 2px solid var(--bronze); }
+        .rank-3::after { content: "\f559"; color: var(--bronze); }
+        .rank-3 .rank-num, .rank-3 .total-val { color: var(--bronze) !important; }
+
+        /* إعدادات الجوال الأنيقة */
         @media (max-width: 650px) {
             body { padding: 10px; }
-            .bg-icon { display: none; } /* إخفاء الزحمة في الخلفية */
-            
+            .bg-icon { display: none; }
             .logo-img { max-width: 140px; }
-            .league-title { font-size: 1.5rem; margin-bottom: 15px; }
+            .league-title { font-size: 1.5rem; }
             
             .table-header { font-size: 0.85rem; padding: 10px 5px; }
-            
             .row { 
-                grid-template-columns: 0.4fr 1.8fr 1fr; /* ترتيب أنسب للجوال */
+                grid-template-columns: 0.4fr 1.8fr 1fr; 
                 padding: 12px 8px;
                 border-radius: 12px;
-                margin-bottom: 8px;
             }
 
-            .stat-hide { display: none; } /* إخفاء التفاصيل الجانبية لتركيز المساحة */
-            
+            .stat-hide { display: none; }
             .player-name { font-size: 1rem; }
             .rank-num { font-size: 1.2rem; }
             .total-val { font-size: 1.4rem; }
+
+            /* تصغير الكؤوس في الجوال */
+            .rank-1::after, .rank-2::after, .rank-3::after {
+                font-size: 2.2rem;
+                left: 2%;
+            }
         }
     </style>
 </head>
