@@ -14,7 +14,7 @@
             --primary-blue: #00d2ff;
             --text-white: #ffffff;
             --gold: #ffd700;
-            --silver: #c0c0c0;
+            --silver: #e0e0e0;
             --bronze: #cd7f32;
         }
 
@@ -27,31 +27,41 @@
             overflow-x: hidden; position: relative;
         }
 
-        /* توزيع الأيقونات بشكل مكثف وجميل */
+        /* أيقونات خلفية مكثفة */
         .bg-icon {
             position: fixed; color: var(--primary-blue);
             opacity: 0.04; z-index: 0; pointer-events: none;
         }
-        .icon-1 { top: 10%; left: 10%; font-size: 6rem; transform: rotate(-15deg); }
-        .icon-2 { top: 75%; right: 8%; font-size: 8rem; transform: rotate(20deg); }
-        .icon-3 { top: 40%; left: 85%; font-size: 5rem; transform: rotate(-10deg); }
-        .icon-4 { bottom: 10%; left: 15%; font-size: 7rem; transform: rotate(15deg); }
-        .icon-5 { top: 20%; right: 20%; font-size: 4rem; transform: rotate(35deg); }
-        .icon-6 { top: 50%; left: 5%; font-size: 5rem; }
-        .icon-7 { bottom: 30%; right: 25%; font-size: 6rem; opacity: 0.03; }
+        /* توزيع عشوائي ومنظم للأيقونات */
+        .i1 { top: 5%; left: 5%; font-size: 5rem; transform: rotate(-15deg); }
+        .i2 { top: 15%; right: 10%; font-size: 4rem; transform: rotate(20deg); }
+        .i3 { top: 40%; left: 2%; font-size: 6rem; transform: rotate(10deg); }
+        .i4 { top: 35%; right: 5%; font-size: 5rem; transform: rotate(-20deg); }
+        .i5 { bottom: 10%; left: 8%; font-size: 7rem; transform: rotate(15deg); }
+        .i6 { bottom: 15%; right: 12%; font-size: 4rem; transform: rotate(-10deg); }
+        .i7 { top: 60%; left: 15%; font-size: 3rem; opacity: 0.02; }
+        .i8 { bottom: 40%; right: 2%; font-size: 5rem; transform: rotate(45deg); }
+        .i9 { top: 25%; left: 25%; font-size: 3rem; }
 
-        .container { width: 100%; max-width: 800px; z-index: 2; position: relative; }
+        .container { width: 100%; max-width: 850px; z-index: 2; position: relative; }
         
-        header { text-align: center; margin-bottom: 50px; }
-        .logo-img { max-width: 280px; height: auto; filter: drop-shadow(0 0 20px var(--primary-blue)); }
+        header { text-align: center; margin-bottom: 40px; }
         
-        /* تصميم الاسم الجديد بدون المستطيل السماوي */
+        /* تكبير الشعار */
+        .logo-img { 
+            max-width: 450px; /* زيادة الحجم */
+            width: 100%;
+            height: auto; 
+            filter: drop-shadow(0 0 35px var(--primary-blue)); 
+        }
+        
+        /* إصلاح النص النهائي */
         .league-title { 
-            font-size: 3.5rem; font-weight: 900; 
-            background: linear-gradient(to bottom, #fff 30%, var(--primary-blue) 100%); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-            margin: 10px 0; text-shadow: 0 0 30px rgba(0, 210, 255, 0.5);
-            letter-spacing: -1px;
+            font-size: 3.8rem; font-weight: 900; 
+            color: #ffffff;
+            text-shadow: 0 0 15px var(--primary-blue), 0 0 30px rgba(0, 210, 255, 0.5);
+            margin: 10px 0;
+            display: block;
         }
 
         .table-header, .row { 
@@ -60,50 +70,52 @@
             align-items: center; text-align: center;
         }
 
-        .table-header { padding: 15px; color: #5d7ba7; font-weight: 700; }
+        .table-header { padding: 15px; color: #5d7ba7; font-weight: 700; font-size: 1.1rem; }
         
         .row { 
             background: var(--card-bg); margin-bottom: 12px; padding: 18px; 
-            border-radius: 15px; border: 1px solid rgba(0, 210, 255, 0.1); 
-            backdrop-filter: blur(10px); transition: 0.3s;
+            border-radius: 18px; border: 1px solid rgba(0, 210, 255, 0.1); 
+            backdrop-filter: blur(12px); transition: 0.3s ease;
         }
 
-        .rank-num { font-size: 1.6rem; font-weight: 900; color: #445b80; }
-        .player-name { font-size: 1.4rem; font-weight: 700; color: #e0e6ed; }
-        .total-val { font-size: 1.8rem; font-weight: 900; color: var(--primary-blue); }
+        .rank-num { font-size: 1.8rem; font-weight: 900; color: #445b80; }
+        .player-name { font-size: 1.5rem; font-weight: 700; color: #e0e6ed; }
+        .total-val { font-size: 2rem; font-weight: 900; color: var(--primary-blue); }
 
-        /* تأثيرات المراكز الثلاثة الأولى */
-        .rank-1 { border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); background: linear-gradient(90deg, rgba(255, 215, 0, 0.05), var(--card-bg)); }
-        .rank-1 .rank-num { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
+        /* تأثيرات المعادن والمراكز */
+        .rank-1 { border: 2px solid var(--gold); box-shadow: 0 0 25px rgba(255, 215, 0, 0.2); }
+        .rank-1 .rank-num { color: var(--gold); }
 
-        .rank-2 { border: 2px solid var(--silver); box-shadow: 0 0 15px rgba(192, 192, 192, 0.15); }
-        .rank-2 .rank-num { color: var(--silver); text-shadow: 0 0 10px var(--silver); }
+        .rank-2 { border: 2px solid var(--silver); box-shadow: 0 0 20px rgba(224, 224, 224, 0.15); }
+        .rank-2 .rank-num { color: var(--silver); }
 
-        .rank-3 { border: 2px solid var(--bronze); box-shadow: 0 0 15px rgba(205, 127, 50, 0.15); }
-        .rank-3 .rank-num { color: var(--bronze); text-shadow: 0 0 10px var(--bronze); }
+        .rank-3 { border: 2px solid var(--bronze); box-shadow: 0 0 20px rgba(205, 127, 50, 0.15); }
+        .rank-3 .rank-num { color: var(--bronze); }
 
         @media (max-width: 650px) {
-            .table-header, .row { grid-template-columns: 0.5fr 2fr 1fr; }
+            .table-header, .row { grid-template-columns: 0.5fr 2fr 1.2fr; }
             .stat-hide { display: none; }
             .league-title { font-size: 2.2rem; }
-            .logo-img { max-width: 200px; }
+            .logo-img { max-width: 300px; }
         }
     </style>
 </head>
 <body>
 
-    <i class="fas fa-trophy bg-icon icon-1"></i>
-    <i class="fas fa-gamepad bg-icon icon-2"></i>
-    <i class="fas fa-camera bg-icon icon-3"></i>
-    <i class="fas fa-paint-brush bg-icon icon-4"></i>
-    <i class="fas fa-star bg-icon icon-5"></i>
-    <i class="fas fa-futbol bg-icon icon-6"></i>
-    <i class="fas fa-medal bg-icon icon-7"></i>
+    <i class="fas fa-trophy bg-icon i1"></i>
+    <i class="fas fa-gamepad bg-icon i2"></i>
+    <i class="fas fa-camera bg-icon i3"></i>
+    <i class="fas fa-paint-brush bg-icon i4"></i>
+    <i class="fas fa-star bg-icon i5"></i>
+    <i class="fas fa-futbol bg-icon i6"></i>
+    <i class="fas fa-medal bg-icon i7"></i>
+    <i class="fas fa-ghost bg-icon i8"></i>
+    <i class="fas fa-crown bg-icon i9"></i>
 
     <div class="container">
         <header>
             <img src="logo.png" class="logo-img" alt="Logo">
-            <h1 class="league-title">دوري هيونكل الموسمي</h1>
+            <span class="league-title">دوري هيونكل الموسمي</span>
         </header>
 
         <div class="table-header">
@@ -111,7 +123,8 @@
         </div>
 
         <div id="leaderboard">
-            </div>
+            <div style="text-align:center; padding:50px; color:var(--primary-blue);">جاري التحديث...</div>
+        </div>
     </div>
 
     <script>
@@ -121,7 +134,7 @@
             try {
                 const response = await fetch(SHEET_URL);
                 const data = await response.text();
-                if (data.includes('<html')) return;
+                if (!data || data.includes('<html')) return;
 
                 const rows = data.split('\n').map(r => r.trim()).filter(r => r !== "");
                 let players = rows.slice(1).map(row => {
@@ -154,11 +167,11 @@
                         </div>
                     `;
                 });
-            } catch (e) { console.log("خطأ في جلب البيانات"); }
+            } catch (e) { console.error(e); }
         }
 
         updateLeaderboard();
-        setInterval(updateLeaderboard, 20000);
+        setInterval(updateLeaderboard, 15000);
     </script>
 </body>
 </html>
