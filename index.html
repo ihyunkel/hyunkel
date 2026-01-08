@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دوري هيونكل الموسمي - مباشر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #050a15;
+            --card-bg: rgba(20, 30, 60, 0.7);
+            --primary-blue: #00d2ff;
+            --text-white: #ffffff;
+            --accent-glow: rgba(0, 210, 255, 0.3);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: radial-gradient(circle at center, #0a1931 0%, #050a15 100%);
+            color: var(--text-white);
+            margin: 0; padding: 20px; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .bg-icon { position: fixed; color: var(--primary-blue); opacity: 0.03; z-index: -1; pointer-events: none; }
+        .icon-1 { top: 5%; left: 5%; font-size: 8rem; }
+        .icon-2 { bottom: 5%; right: 5%; font-size: 10rem; }
+
+        .container { width: 100%; max-width: 800px; z-index: 1; }
+        header { text-align: center; margin-bottom: 30px; }
+        .logo-img { max-width: 400px; filter: drop-shadow(0 0 30px var(--primary-blue)); margin-bottom: -10px; }
+        h1 { font-size: 3rem; font-weight: 900; background: linear-gradient(to bottom, #fff, var(--primary-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; }
+
+        .table-header, .row { 
+            display: grid; grid-template-columns: 0.4fr 1.8fr 0.8fr 0.8fr 0.8fr; 
+            align-items: center; text-align: center;
+        }
+        .table-header { padding: 10px 15px; color: #5d7ba7; font-weight: 700; font-size: 1rem; }
+        .row { 
+            background: var(--card-bg); margin-bottom: 10px; padding: 15px; 
+            border-radius: 12px; border: 1px solid rgba(0, 210, 255, 0.1); 
+            backdrop-filter: blur(10px); transition: 0.3s;
+        }
+
+        .total-val { font-size: 1.6rem; font-weight: 900; color: var(--primary-blue); }
+        
+        .loading { margin-top: 50px; font-size: 1.2rem; color: var(--primary-blue); text-align: center; }
+
+        @media (max-width: 650px) {
+            .table-header, .row { grid-template-columns: 0.5fr 2fr 1fr; }
+            .stat-hide { display: none; }
+            .logo-img { max-width: 250px; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <i class="fas fa-trophy bg-icon icon-1"></i>
+    <i class="fas fa-gamepad bg-icon icon-2"></i>
+
+    <div class="container">
+        <header>
+            <img src="logo.png" class="logo-img" alt="Logo">
+            <h1>دوري هيونكل الموسمي</h1>
+        </header>
+
+        <div id="loader" class="loading">جاري مزامنة النتائج المباشرة...</div>
+
+        <div id="table-content" style="display:none;">
+            <div class="table-header">
+                <div>#</div><div>اللاعب</div><div class="stat-hide">تويتش</div><div class="stat-hide">ديسكورد</div><div>المجموع</div>
+            </div>
+            <div id="leaderboard"></div>
+        </div>
+    </div>
+
+    <script>
+        const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTJiQ3Jz9lj4LDG_iP-LOEFS6Oz57ODw4JzxJWZjQT9bJ93ZHQsPrU4Ycr45JDllxFc6smJxqKATkLL/pub?output=csv"; 
+
+        async function fetchScores() {
+            try {
+                const response = await fetch(SHEET_URL);
+                const csvText = await response.text();
+                const rows = csvText.split('\n').filter(row => row.trim() !== "");
+                
+                // تحويل البيانات من CSV إلى مصفوفة كائنات
+                let players = rows.slice(1).map(row => {
+                    const cols = row.split(',');
+                    const twitch = parseInt(cols[2]) || 0;
+                    const discord = parseInt(cols[3]) || 0;
+                    return {
+                        name: cols[0],
+                        twitch: twitch,
+                        discord: discord,
+                        total: twitch + discord
+                    };
+                });
+
+                // ترتيب اللاعبين حسب المجموع (الأعلى أولاً)
+                players.sort((a, b) => b.total - a.total);
+
+                displayData(players);
+            } catch (error) {
+                console.error("خطأ في جلب البيانات:", error);
+                document.getElementById('loader').innerText = "حدث خطأ في جلب البيانات المباشرة.";
+            }
+        }
+
+        function displayData(players) {
+            const list = document.getElementById('leaderboard');
+            list.innerHTML = "";
+            players.forEach((p, i) => {
+                const row = document.createElement('div');
+                row.className = 'row';
+                row.innerHTML = `
+                    <div class="rank-num">${i + 1}</div>
+                    <div class="player-name">${p.name}</div>
+                    <div class="stat-hide">${p.twitch}</div>
+                    <div class="stat-hide">${p.discord}</div>
+                    <div class="total-val">${p.total}</div>
+                `;
+                list.appendChild(row);
+            });
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('table-content').style.display = 'block';
+        }
+
+        // جلب البيانات عند التحميل
+        fetchScores();
+        // تحديث البيانات تلقائياً كل 30 ثانية
+        setInterval(fetchScores, 30000);
+    </script>
+</body>
+</html>
